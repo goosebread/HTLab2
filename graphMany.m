@@ -1,12 +1,13 @@
-%Alex Yeh 3/2/2021
+%Alex Yeh 3/5/2021
 %HT Lab 2
 
 %plots n sets of data
-%Assumes BITalino EMG raw data. Must be modified to support other
+%Assumes BITalino EMG raw data/uses adcTomV. Must be modified to support other
 %calibration methods
 
 %takes in arrays for dataFiles and titles
 %all files must have the same sampling rate and time duration
+%graphs the signals in time and frequency domains
 function graphMany(dataFiles,n,sr,time,titles)
     datamV=zeros(time*sr,n);%time*sr points per set, n sets of data
     for i=1:n
@@ -38,7 +39,7 @@ function graphMany(dataFiles,n,sr,time,titles)
     dataP=fft(datamV);
     
     %time plots
-    figure(1)
+    figure
     hold on
     for i=1:n
         subplot(n,1,i)
@@ -50,19 +51,19 @@ function graphMany(dataFiles,n,sr,time,titles)
     end
     
     %power spectrum plots
-    figure(2)
+    figure
     hold on
     freq = (0:(time*sr/2))/time;
     for i=1:n
         P1=(dataP(:,i).*conj(dataP(:,i)))/(sr*time);
         
         subplot(n,1,i)
-        plot(freq,P1(1:sr*time/2+1))
+        semilogx(freq,P1(1:sr*time/2+1))
         xlabel('Frequency (Hz)')
         xlim([0 500]);
-        ylim([0,10]);%30,000 for walking
+        %ylim([0,10]);%30,000 for walking
         ylabel('Signal Power')
-        title('Power Spectrum')
+        title(append(titles(i),' Power Spectrum'))
     end
 
 end

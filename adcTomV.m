@@ -1,4 +1,4 @@
-%Alex Yeh 3/2/2021
+%Alex Yeh 3/5/2021
 %HT Lab 2
 
 %Converts BITalino raw digital data to mV
