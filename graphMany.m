@@ -61,7 +61,6 @@ function graphMany(dataFiles,n,sr,time,titles)
         semilogx(freq,P1(1:sr*time/2+1))
         xlabel('Frequency (Hz)')
         xlim([0 500]);
-        %ylim([0,10]);%30,000 for walking
         ylabel('Signal Power')
         title(append(titles(i),' Power Spectrum'))
     end
